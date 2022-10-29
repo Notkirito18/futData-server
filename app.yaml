@@ -1,0 +1,3 @@
+runtime: nodejs16
+env_variables:
+  MONGO_CONNECT_STRING: "mongodb+srv://kirito:A1V6IR4550@futdatacluster.g67mlml.mongodb.net/FutData?retryWrites=true&w=majority"

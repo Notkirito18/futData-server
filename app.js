@@ -11,11 +11,12 @@ const connectDB = (url) => {
 const FutCardSchema = new mongoose.Schema({
   name: { type: String, required: true },
   futId: { type: String, required: true },
+  rating: { type: Number },
+  position: { type: String },
 });
 const corsOpts = {
   origin: "*",
   methods: ["GET", "POST", "DELETE", "PATCH"],
-
   allowedHeaders: ["Content-Type"],
 };
 app.use(cors(corsOpts));
@@ -40,13 +41,14 @@ router.post("/", async (req, res) => {
 });
 app.use(express.json());
 app.use("/api/", router);
+app.use("/", (req, res) => {
+  res.send("hosting works");
+});
 
 const port = 5000;
 const start = async () => {
   try {
-    await connectDB(
-      "mongodb+srv://kirito:A1V6IR4550@futdatacluster.g67mlml.mongodb.net/FutData?retryWrites=true&w=majority"
-    );
+    await connectDB(envirement.MONGO_CONNECT_STRING);
     app.listen(port, () => {
       console.log(`Server is listening on port ${port}...`);
     });
